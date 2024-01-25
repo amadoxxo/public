@@ -247,7 +247,7 @@ class Rg900736525_1 extends RgBase
         $posy = $fpdf->nPosYFin;
         $posfin = 195;
 
-        // $items = array_merge($items,$items,$items,$items,$items);
+        // $items = array_merge($items,$items,$items,$items,$items,$items,$items,$items,$items, $items);
         // $items = array_merge($items,$items,$items,$items,$items,$items);
         // $items = array_merge($items,$items,$items,$items);
 
@@ -397,19 +397,19 @@ class Rg900736525_1 extends RgBase
             $fpdf->Ln(4);
         }
 
-        $nLimit = $cdo_tipo == "FC" ? 131 : 155;
+        $nLimit = $cdo_tipo == "FC" ? 110 : 155;
         if ($fpdf->GetY() > $nLimit) {
             $fpdf->posy = 202;
             $fpdf->RoundedRect($posx, $posy - 6, 195, ($posfin - $posy) + 12, 2);
             $fpdf->AddPage('P', 'Letter');
         }
-        $nTamRect = $cdo_tipo == "FC" ? 58 : 34;
+        $nTamRect = $cdo_tipo == "FC" ? 75 : 44;
         $fpdf->RoundedRect($posx, $posy - 6, 195, ($posfin - $nTamRect) - ($posy), 2);
 
         $posy = $nLimit+1;
-        $fpdf->setXY($posx, $posy+1);
+        $fpdf->setXY($posx, $posy+5);
         $fpdf->SetFont('Times', 'B', 6);
-        $fpdf->MultiCell(45, 3.5, "Total Item: ".$contItem, 0, 'L');
+        $fpdf->MultiCell(45, 10, "Total Item: ".$contItem, 0, 'L');
         $fpdf->Ln(3);
 
         $intSubtotalVlrUni = $intSubTotalVlrUniIp + $intSubTotalVlrUniPcc;
@@ -419,7 +419,7 @@ class Rg900736525_1 extends RgBase
         $intTotalFacturaCOP = $intSubtotalVlrCOP + $intIva    - ($intTotalReteIcaCOP + $intTotalReteFteCOP4 + $intTotalReteFteCOP11 + $intTotalReteIvaCOP);
         $intTotalFacturaUSD = $intSubtotalVlrUSD + $intIvaUSD - ($intTotalReteIcaUSD + $intTotalReteFteUSD4 + $intTotalReteFteUSD11 + $intTotalReteIvaUSD);
 
-        $fpdf->setXY($posx + 67, $posy);
+        $fpdf->setXY($posx + 67, $posy+6);
         $fpdf->SetFont('Times', 'B', 7.5);
         $fpdf->Cell(53, 4, "SUBTOTAL", 0, 0, 'L');
         $fpdf->SetFont('Times', '', 7.5);
@@ -500,8 +500,8 @@ class Rg900736525_1 extends RgBase
         $fpdf->Cell(25, 4, number_format(($datosComprobante['moneda'] != "USD") ? $intSaldoFavor : 0,$nDecimal, ',', '.'), 0, 0, 'R');
         $fpdf->SetFont('Times', 'B', 7.5);
         $fpdf->Ln(3);
-        $fpdf->RoundedRect($posx + 67, $posy, 128, ($fpdf->getY() - $posy) + 1, 2);
-        $fpdf->RoundedRect($posx, $posy, 65, ($fpdf->getY() - $posy) + 1, 2);
+        $fpdf->RoundedRect($posx + 67, $posy+5, 128, ($fpdf->getY() - $posy)-4, 2);
+        $fpdf->RoundedRect($posx, $posy+5, 65, ($fpdf->getY() - $posy)-4, 2);
         $posy = $fpdf->getY() + 2;
 
         $strValorLetras = NumToLetrasEngine::num3letras(number_format(($datosComprobante['moneda'] == "USD") ? $intTotalUSD : $intTotal, $nDecimal, '.', ''), false, true, $strMoneda);

@@ -20,7 +20,7 @@ class PDF900736525_1 extends PDFBase{
         $strTitulo = ($this->datosComprobante['cdo_tipo'] == "FC") ? "FACTURA ELECTRÓNICA\nDE VENTA" : $this->datosComprobante['cdo_tipo_nombre']."\nELECTRÓNICA";
 
         $posx = 10;
-        $posy = 8;
+        $posy = 0;
 
         $this->posx = $posx;
         $this->posy = $posy;
@@ -32,12 +32,12 @@ class PDF900736525_1 extends PDFBase{
         $this->TextWithDirection(7,210,utf8_decode("NOMBRE DEL FABRICANTE DEL SOFTWARE (PROVEEDOR TECNOLÓGICO): ".$this->datosComprobante['razon_social_pt']." NIT: ".$this->datosComprobante['nit_pt']." NOMBRE DEL SOFTWARE: ".$this->datosComprobante['nombre_software']),'U');
 
         //FACTURA
-        $this->setXY($posx+75,$posy+1);
+        $this->setXY($posx+75,$posy+7);
         $this->SetFont('Times','IB',9);
         $this->MultiCell(60,4, utf8_decode(mb_strtoupper($strTitulo)),0,"C");
         $this->setX($posx+75);
         $this->Cell(60,4, "No. ".$this->datosComprobante['rfa_prefijo']."    ".$this->datosComprobante['cdo_consecutivo'],0,0,"C");
-        $this->RoundedRect($posx+75, $posy, 60, 14, 2);
+        $this->RoundedRect($posx+75, $posy+6, 60, 14, 2);
 
         $this->setXY($posx+10,$posy+27);
         $this->SetFont('Times','',8);
@@ -176,7 +176,7 @@ class PDF900736525_1 extends PDFBase{
         $this->Cell(25,5, "VLR. UNITARIO",0,0,'C');
         $this->Cell(25,5, "VALOR USD",0,0,'C');
         $this->Cell(25,5, "VALOR COP",0,0,'C');
-        $this->ln(7);
+        $this->ln(3);
 
         $this->nPosYFin = $posy+9;
     }
@@ -217,7 +217,7 @@ class PDF900736525_1 extends PDFBase{
             $this->setX($posx+146);
             $this->SetFont('Times','',6);
             $this->MultiCell(50,2,utf8_decode($this->datosComprobante['cufe']),0,'L');
-            $this->Rect($posx, $posy-1, 195, 39);
+            $this->Rect($posx, $posy-1, 195, 36);
         }
 
     }
